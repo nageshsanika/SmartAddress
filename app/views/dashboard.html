@@ -1,0 +1,32 @@
+<div class="container"  ng-controller="DashboardController">
+  <center> <h4 class="text-success">{{successMessage+smartAddressToken}}</h4></center>
+  <hr/>
+  <div class="col-md-4 dashboard-left">
+    <form name="smartAddress" class="form-horizontal">
+      <div class="control-group" ng-class="{error: smartAddress.address.$invalid}">
+        <label class="control-label" for="address"></label>
+        <textarea rows="5" class="form form-control" ng-model="address.address" id="address" name="address" placeholder="Enter your Address" required></textarea>
+      </div>
+      <br/>
+      <button ng-click="saveAddress()" ng-disabled="smartAddress.$invalid" class="btn btn-primary">
+        Generate Smart Address Token <span class="glyphicon glyphicon-ok"></span>
+      </button>
+    </form>
+  </div>
+  <div class="col-md-7 dashboard-right" ng-controller="AddressDisplayController">
+    <div class="row">
+      <input class="form-control register pull-right" type="text" ng-model="search" class="search-query" placeholder="Filter">
+      <h4 class="text-primary">Smart Addresses you Created so far</h4>
+      <hr/>
+      <div ng-repeat="address in addressesData | filter:search | orderBy:'token'" ng-show="address._id.$oid">
+        <div><h4 class="text-warning">{{address.token}}</h4>
+          <a class="pull-right text-danger" style="margin-left:20px" ng-click="deleteUser(address._id.$oid)"><span class="glyphicon glyphicon-remove"></span></a>
+          <a class="pull-right text-primary" href="#/edit/{{address._id.$oid}}"><span class="glyphicon glyphicon-pencil"></span></a>
+
+        </div>
+        <div>{{address.address || html}}</div>
+        <hr/>
+      </div>
+    </div>
+  </div>
+</div>

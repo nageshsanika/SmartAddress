@@ -1,0 +1,18 @@
+.header{
+  background-color:#fcf8e3;
+}
+#tokensearchid{
+  width:500px;
+}
+.register{
+  width:330px;
+}
+.header_search{
+  margin-left:13%;
+}
+.dashboard-left{
+  border-right:1px solid blueviolet;
+}
+.dashboard-right{
+  padding-left:30px;
+}

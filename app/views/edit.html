@@ -1,0 +1,16 @@
+<div class="row" ng-controller="EditController">
+  Previous Address <h4><b>{{addressData.address}}</b></h4>
+  <hr/>
+  <div class="col-md-5">
+    <form name="smartAddress" class="form-horizontal">
+      <div class="control-group" ng-class="{error: smartAddress.address.$invalid}">
+        <label class="control-label" for="address"></label>
+        <textarea rows="5" class="form form-control" ng-model="address.address" id="address" name="address" placeholder="Enter your new Address" required></textarea>
+      </div>
+      <br/>
+      <button class="btn btn btn-success" ng-click="updateAddress()" ng-disabled="smartAddress.$invalid" class="btn btn-primary">
+        Update <span class="glyphicon glyphicon-ok"></span>
+      </button>
+    </form>
+  </div>
+</div>

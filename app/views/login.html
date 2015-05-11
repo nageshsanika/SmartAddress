@@ -1,0 +1,26 @@
+<div class="jumbotron row" ng-controller="LoginController">
+  <center>
+    <h3 class="text-danger">{{successRegisterMessage}}</h3>
+    <form name="loginForm" class="form-horizontal">
+
+      <h2>Login</h2>
+      <p class="lead">
+        <div class="control-group" ng-class="{error: loginForm.email.$invalid}">
+          <label class="control-label" for="email"></label>
+          <input type="email" class="form-control register" ng-model="user.email" id="email" required name="email" placeholder="EMail" />
+        </div>
+        <div class="control-group" ng-class="{error: loginForm.password.$invalid}">
+          <label class="control-label" for="password"></label>
+          <input type="password" class="form-control register" ng-model="user.password" id="password" required name="password" placeholder="Password" />
+        </div>
+      </p>
+      <p>
+        <button class="btn btn btn-success" ng-click="login()" ng-disabled="loginForm.$invalid"
+                class="btn btn-primary">Login <span class="glyphicon glyphicon-ok"></span>
+        </button>
+      </p>
+      <h3 class="text-danger">{{errorLoginMessage}}</h3>
+    </form>
+  </center>
+</div>
+
