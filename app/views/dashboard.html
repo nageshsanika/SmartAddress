@@ -13,20 +13,24 @@
       </button>
     </form>
   </div>
-  <div class="col-md-7 dashboard-right" ng-controller="AddressDisplayController">
+  <div class="col-md-6 dashboard-right dashboard-left" style="padding-right:30px;">
     <div class="row">
       <input class="form-control register pull-right" type="text" ng-model="search" class="search-query" placeholder="Filter">
-      <h4 class="text-primary">Smart Addresses you Created so far</h4>
+      <h4 class="text-primary">Your Smart Addresses</h4>
       <hr/>
       <div ng-repeat="address in addressesData | filter:search | orderBy:'token'" ng-show="address._id.$oid">
-        <div><h4 class="text-warning">{{address.token}}</h4>
-          <a class="pull-right text-danger" style="margin-left:20px" ng-click="deleteUser(address._id.$oid)"><span class="glyphicon glyphicon-remove"></span></a>
-          <a class="pull-right text-primary" href="#/edit/{{address._id.$oid}}"><span class="glyphicon glyphicon-pencil"></span></a>
-
-        </div>
-        <div>{{address.address || html}}</div>
-        <hr/>
+        <!-- custom directive for addresses list -->
+        <addresses-list address="address"></addresses-list>
+        <!-- end-custom directive -->
       </div>
+    </div>
+  </div>
+  <div class="col-md-2 dashboard-right">
+    <h5 class="text-danger"><b>Registered Users</b></h5><hr/>
+    <div ng-repeat="user in allUsersData | orderBy:'name'">
+      <!-- custom directive for users list -->
+      <users-list user="user"></users-list>
+      <!-- end-custom directive -->
     </div>
   </div>
 </div>

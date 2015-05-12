@@ -55,8 +55,7 @@
                 </div>
               </div>
             </form>
-            <pre ng-show="searchResults">{{resultSmartAddressData || html}}<span class="glyphicon glyphicon-remove pull-right" ng-click="hideResults()"></span></pre>
-
+            <pre ng-show='searchResults'>{{resultSmartAddressData || html}}<span class='glyphicon glyphicon-remove pull-right' ng-click='hideResults()'></span></pre>
           </div>
           </div>
         </div>
@@ -95,12 +94,15 @@
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
+    <script src="scripts/services/restService.js"></script>
     <script src="scripts/controllers/register.js"></script>
     <script src="scripts/routes/routes.js"></script>
     <script src="scripts/controllers/login.js"></script>
     <script src="scripts/controllers/dashboard.js"></script>
     <script src="scripts/controllers/edit.js"></script>
     <script src="scripts/controllers/search.js"></script>
+    <script src="scripts/directives/addressListDirective.js"></script>
+    <script src="scripts/directives/usersListDirective.js"></script>
     <!-- endbuild -->
 
 </body>

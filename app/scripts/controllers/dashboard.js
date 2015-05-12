@@ -6,52 +6,48 @@
  * @ngdoc function
  * @name smartAddressApp.controller:DashboardController
  * @description
- * #LoginController
+ * #DashboardController
  * Controller of the smartAddressApp
  */
-angular.module('smartAddressApp').controller('DashboardController', function ($rootScope,$scope,Restangular,$location,$http){
+angular.module('smartAddressApp').controller('DashboardController', function ($rootScope,$scope,Restangular,$location){
   if(typeof $rootScope.id==='undefined'){
+    //redirecting if not a authenticated user
     $location.path('/login');
   }
   else {
+    //get all list of addresses created so far to calculate length and to genreate smart address post fix
     $scope.allAddressesData = Restangular.all('addresses').getList().$object;
+    //getting all registered users
+    $scope.allUsersData = Restangular.all('users').getList().$object;
+    //getting all the addresses created by the current logged in user
+    $scope.getCurrentUserCreatedAddresses=function() {
+      Restangular.all('addresses').getList({q:{user_id: $rootScope.id}}).then(function(data){
+       $scope.addressesData=data;
+      });
+    }
+    $scope.getCurrentUserCreatedAddresses();
 
-    $http.get('https://api.mongolab.com/api/1/databases/mongodb_nagesh_test_env/collections/addresses?q={"user_id":"'+$rootScope.id+'"}&apiKey=N4-PzMrqKRTMPQ3-J06bDMHUkOjifzfj').
-    success(function(data, status, headers, config) {
-      $scope.addressesData=data;
-    }).
-    error(function(data, status, headers, config) {
-    });
-
+    //save address
     $scope.saveAddress=function(){
+      //taking user id from rootScope
       $scope.address.user_id=$rootScope.id;
+
+      //generating Smart address token based on address object length;
       $scope.address.token = 'SMARTADD-' + $scope.allAddressesData.length;
+
+      //saving the address data using Restangular POST
       Restangular.all('addresses').post($scope.address).then(function (address) {
+        //success message and token after successfully saving the data
         $scope.successMessage = "Your Address is Successfully added ! your Token is ";
         $scope.smartAddressToken = address.token;
-        $http.get('https://api.mongolab.com/api/1/databases/mongodb_nagesh_test_env/collections/addresses?q={"user_id":"'+$rootScope.id+'"}&apiKey=N4-PzMrqKRTMPQ3-J06bDMHUkOjifzfj').
-          success(function(data, status, headers, config) {
-            $scope.addressesData=data;
-            $scope.allAddressesData = Restangular.all('addresses').getList().$object;
-          }).
-          error(function(data, status, headers, config) {
-          });
+
+        //getting all the addresses created by the current logged in user including recently added address also
+        $scope.getCurrentUserCreatedAddresses();
+
+        //resetting address model and redirecting to dashboard;
           $scope.address.address = '';
           $location.path('/dashboard');
         });
     }
   }
-})
-  .controller('AddressDisplayController',function($rootScope,$scope, $location, Restangular,$http) {
-    $scope.deleteUser = function (addressId) {
-      Restangular.one('addresses', addressId).remove().then(function (addressData) {
-        $http.get('https://api.mongolab.com/api/1/databases/mongodb_nagesh_test_env/collections/addresses?q={"user_id":"'+$rootScope.id+'"}&apiKey=N4-PzMrqKRTMPQ3-J06bDMHUkOjifzfj').
-          success(function(data, status, headers, config) {
-            $scope.addressesData=data;
-          }).
-          error(function(data, status, headers, config) {
-          });
-        $location.path('/dashboard');
-      });
-    };
 });
