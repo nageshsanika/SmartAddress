@@ -3,6 +3,7 @@
  */
 'use strict';
 smartAddressApp.controller('SearchController', function ($rootScope,$scope,$location,Restangular) {
+  $scope.searchResults=false;
   $scope.searchSmartAddressTokens = function () {
     //showing search result div
     $scope.searchResults = true;

@@ -10,6 +10,7 @@
  * Controller of the smartAddressApp
  */
 angular.module('smartAddressApp').controller('DashboardController', function ($rootScope,$scope,Restangular,$location){
+  $scope.addressesData='';
   if(typeof $rootScope.id==='undefined'){
     //redirecting if not a authenticated user
     $location.path('/login');

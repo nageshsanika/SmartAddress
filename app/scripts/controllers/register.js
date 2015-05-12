@@ -12,6 +12,7 @@
  */
 smartAddressApp.controller('RegisterController', function ($scope,$location,Restangular,$rootScope) {
   //saving user details using restangular save()
+
   $scope.save = function () {
     Restangular.all('users').post($scope.user).then(function (user) {
       //show registration successful message
@@ -20,4 +21,5 @@ smartAddressApp.controller('RegisterController', function ($scope,$location,Rest
       $location.path('/login'); //redirecting to login
     });
   };
+  $scope.successRegister=true;
 });

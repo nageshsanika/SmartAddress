@@ -11,6 +11,7 @@
  * Controller of the smartAddressApp
  */
 smartAddressApp.controller('LoginController', function ($rootScope,$scope,$location,Restangular) {
+
   $scope.login = function () {
     //getting user object for the entered email and password
     Restangular.all('users').getList({q:{email: $scope.user.email , password : $scope.user.password }}).then(function(data){
@@ -22,6 +23,7 @@ smartAddressApp.controller('LoginController', function ($rootScope,$scope,$locat
         $rootScope.currentUser = data['0']['name'];
         $rootScope.id=data['0']['_id']['$oid'];
         //redirecting to dashboard
+        $scope.errorLoginMessage='';
         $location.path('/dashboard');
       }
       //else show authentication error
