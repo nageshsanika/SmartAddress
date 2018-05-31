@@ -13,9 +13,9 @@ Running `grunt test` will run the unit tests with karma.
 SMART ADDRESS is ten characters code which makes it easy to remember and communicate address. 
 Its a short-code which is ubiquitous with addresses. It helps to  Share or find an address in easy way. The receiver don't have to explain the  address and it avoids long conversations. In the world of smart phones having a smart address helps you to share your address to direct someone or create a smart address to find a place.
 
-####For Developing the Smart Address application I used AngularJS and MongoLab single-node shared clusters API. and few more points are as followed.
+###For Developing the Smart Address application I used AngularJS and MongoLab single-node shared clusters API. and few more points are as followed.
 
-####1. Followed the Best Practises in AngularJS 
+###1. Followed the Best Practises in AngularJS 
 Reference:
 https://github.com/angular/angular.js/wiki/Best-Practices
 
